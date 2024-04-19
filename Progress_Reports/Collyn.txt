@@ -1,1 +1,5 @@
-Progress
+4/9
+ordered the greenhouse
+
+4/19
+began working on the gui setup
