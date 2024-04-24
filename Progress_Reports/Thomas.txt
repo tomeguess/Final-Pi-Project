@@ -5,3 +5,7 @@ Ordered Parts and Sensors
 Parts came in and I realized I need a few more 
 Ordered the parts I needed
 Then I messed around with the sensors and got the moisture sensor to work and tried to implement the humidity and temperature sensor
+
+4/21 - 4/28
+I tested all of the sensors and I got them all working
+Got code for all of the sensors working and functional
