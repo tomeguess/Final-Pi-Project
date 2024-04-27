@@ -1,1 +1,43 @@
+#include "DHT.h"
+#define DHTTYPE DHT11
+
+#define DHTPIN 2
+DHT dht(DHTPIN,DHTTYPE);
+int Moist = A1;
+
+void setup() {
+  pinMode(2, OUTPUT);
+  pinMode(7, OUTPUT);
+  pinMode(4, OUTPUT);
+  Serial.begin(9600);
+  dht.begin();
+}
+
+void loop() {
+  int Moisture = analogRead(Moist);
+ Serial.print("Moisture Level :");
+ Serial.println(Moisture);
+  delay(2000);
+  int humidity = dht.readHumidity();
+  float temp = dht.readTemperature();
+  Serial.print("Humidity: ");
+  Serial.print(humidity);
+  Serial.print("%  Temperature: ");
+  Serial.print(temp);
+  Serial.println("c");
+  digitalWrite(4, HIGH);
+  if (humidity < 65) {
+    digitalWrite(7,HIGH);
+    }
+  else {
+    digitalWrite(7,LOW);
+  }
+  if (temp >24.00){
+    digitalWrite(4, HIGH);
+  }
+  else {
+    digitalWrite(4, LOW);
+  }
+}
+
 
