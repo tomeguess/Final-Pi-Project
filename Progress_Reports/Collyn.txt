@@ -11,5 +11,6 @@ made the button for the GUI
 began working on the change plant function for button functionality
 
 4/29
+bought poster board and paper for presentation
 continued working on the change plant function
 considered options of using a dictionary, class, or list for presaved plants
