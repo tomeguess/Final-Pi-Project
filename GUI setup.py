@@ -11,11 +11,12 @@ class Greenhouse(Frame):
     # generalize width, height, and color for all boxes
     WIDTH = 43
     HEIGHT = 7
+    FILL_HEIGHT= 3
     COLOR = "snow2"
     FONT = "Georgia"
     def layout(self):
         # create label for temperature display
-        self.display = Label(self, text = "Current Greenhouse Temperature",
+        self.display = Label(self, text = "Current Greenhouse Temperature \n\n\n update",
                              anchor = N, bg = self.COLOR,
                              height = self.HEIGHT, width = self.WIDTH,
                              font = (self.FONT, 20))
@@ -24,7 +25,7 @@ class Greenhouse(Frame):
                           sticky = E+W+N+S)
         
         # create label for Humidity display
-        self.display = Label(self, text = "Current Greenhouse Humidity",
+        self.display = Label(self, text = "Current Greenhouse Humidity \n\n\n update",
                              anchor = N, bg = self.COLOR,
                              height = self.HEIGHT, width = self.WIDTH,
                              font = (self.FONT, 20))
@@ -40,9 +41,17 @@ class Greenhouse(Frame):
         # create grid manager for label
         self.display.grid(row = 1, column = 0, columnspan = 3,\
                           sticky = E+W+N+S)
+        # add rows to display ideal environment
+        self.display = Label(self, text = "Temperature: \n Humidity: \n Soil Moisture: ",
+                             anchor = W, bg = self.COLOR,
+                             height = self.FILL_HEIGHT, width = self.WIDTH,
+                             font = (self.FONT, 20))
+        # create grid manager for label
+        self.display.grid(row = 1, column = 0, columnspan = 3,\
+                          sticky = W)
         
         # create label for soil moisuture display
-        self.display = Label(self, text = "Current Soil Moisture",
+        self.display = Label(self, text = "Current Soil Moisture \n\n\n update",
                              anchor = N, bg = self.COLOR,
                              height = self.HEIGHT, width = self.WIDTH,
                              font = (self.FONT, 20))
@@ -58,6 +67,14 @@ class Greenhouse(Frame):
         # create grid manager for label
         self.display.grid(row = 2, column = 3, columnspan = 3,\
                           sticky = E+W+N+S)
+        # add rows for fan, mister, and moisture display
+        self.display = Label(self, text = "Fan: \n Mister: \n Soil Moisture:",
+                             anchor = W, bg = self.COLOR,
+                             height = self.FILL_HEIGHT, width = self.WIDTH,
+                             font = (self.FONT, 20))
+        # create grid manager for label
+        self.display.grid(row = 2, column = 3, columnspan = 3,\
+                          sticky = W)
         self.pack()
 
         # button creation
