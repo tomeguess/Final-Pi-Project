@@ -1,6 +1,7 @@
 # a setup of the GUI layout using tkinter
 #import the library
 from tkinter import *
+from plant import *
 
 class Greenhouse(Frame):
     def __init__ (self, parent):
@@ -42,7 +43,7 @@ class Greenhouse(Frame):
         self.display.grid(row = 1, column = 0, columnspan = 3,\
                           sticky = E+W+N+S)
         # add rows to display ideal environment
-        self.display = Label(self, text = "Temperature: \n Humidity: \n Soil Moisture: ",
+        self.display = Label(self, text = f"Temperature: \n Humidity: \n Soil Moisture: ",
                              anchor = W, bg = self.COLOR,
                              height = self.FILL_HEIGHT, width = self.WIDTH,
                              font = (self.FONT, 20))
