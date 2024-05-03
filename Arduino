@@ -3,10 +3,14 @@
 
 #define DHTPIN 2
 DHT dht(DHTPIN,DHTTYPE);
-int Moist = A1;
+
+float tempsetpoint = 24.00;
+int humiditysetpoint = 70;
+int moisturesetpoint = 0;
+String fanstatus = "Off";
+String misterstatus = "Off";
 
 void setup() {
-  pinMode(2, OUTPUT);
   pinMode(7, OUTPUT);
   pinMode(4, OUTPUT);
   Serial.begin(9600);
@@ -14,30 +18,39 @@ void setup() {
 }
 
 void loop() {
-  int Moisture = analogRead(Moist);
- Serial.print("Moisture Level :");
- Serial.println(Moisture);
-  delay(2000);
-  int humidity = dht.readHumidity();
+  
+  float humidity = dht.readHumidity();
   float temp = dht.readTemperature();
-  Serial.print("Humidity: ");
-  Serial.print(humidity);
-  Serial.print("%  Temperature: ");
+  int Moisture = analogRead(A1);
+
   Serial.print(temp);
-  Serial.println("c");
-  digitalWrite(4, HIGH);
-  if (humidity < 65) {
+  Serial.print(",");
+  Serial.print(humidity);
+  Serial.print(",");
+  Serial.print(Moisture);
+  Serial.print(",");
+  Serial.print(fanstatus);
+  Serial.print(",");
+  Serial.println(misterstatus);
+
+  
+  delay(2000);
+
+  if (humidity < humiditysetpoint) {
     digitalWrite(7,HIGH);
+    misterstatus = "On";
     }
   else {
     digitalWrite(7,LOW);
+    misterstatus = "Off";
   }
-  if (temp >24.00){
+  if (temp > tempsetpoint){
     digitalWrite(4, HIGH);
+    fanstatus = "On";
   }
   else {
     digitalWrite(4, LOW);
+    fanstatus = "Off";
   }
 }
-
 
