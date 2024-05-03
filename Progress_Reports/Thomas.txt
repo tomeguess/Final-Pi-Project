@@ -9,3 +9,9 @@ Then I messed around with the sensors and got the moisture sensor to work and tr
 4/21 - 4/28
 I tested all of the sensors and I got them all working
 Got code for all of the sensors working and functional
+
+4/28- 5/3
+Got the misters and fans running and all of the circutry with them functional. 
+Worked on getting all of the variables from the arduino to the python file. Ran into several issues with 
+this and spent a long tweaking this. Figured out that you cannot update a GUI while importing variables from the Serial monitor 
+so i had to make a funtion in a class to stagger the importing and updating of the GUI
