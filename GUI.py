@@ -15,6 +15,7 @@ class SerialReader:
         self.moisture = 0
         self.fanstatus = " "
         self.misterstatus = " "
+        self.waterstatus = " "
         self.running = False
 
     
@@ -26,12 +27,13 @@ class SerialReader:
         while self.running:
             line = self.ser.readline().decode().strip()
             values = line.split(",")
-            if len(values) == 5:
+            if len(values) == 6:
                 self.temp = float(values[0])
                 self.humidity = float(values[1])
                 self.moisture = int(values[2])
                 self.fanstatus = str(values[3])
                 self.misterstatus = str(values[4])
+                self.waterstatus = str(values[5])
 
     def stop_reading(self):
         self.running = False
@@ -78,7 +80,7 @@ class Greenhouse(Frame):
         self.display.grid(row = 1, column = 0, columnspan = 3,\
                           sticky = E+W+N+S)
         # add rows to display ideal environment
-        self.display = Label(self, text = f"Temperature: \n Humidity: \n Soil Moisture: ",
+        self.display = Label(self, text = f"\tTemperature:     70 - 80 degrees  \nHumidity:     60-80% \nSoil Moisture:   80%   ",
                              anchor = W, bg = self.COLOR,
                              height = self.FILL_HEIGHT, width = self.WIDTH,
                              font = (self.FONT, 20))
@@ -113,8 +115,8 @@ class Greenhouse(Frame):
                           sticky = W)
         self.pack()
 
-        # button creation
-        # create button to change the plant that is in the greenhouse
+        #button creation
+        #create button to change the plant that is in the greenhouse
         # img = PhotoImage(file = "change plant button.PNG")
         # button = Button(self, bg = "white", image = img)
         # button.image = img
@@ -129,7 +131,7 @@ class Greenhouse(Frame):
             self.tempdisplay.config(text=f"Current Greenhouse Temperature \n\n\n{self.serial_reader.temp}")
             self.humdisplay.config(text=f"Current Greenhouse Humidity \n\n\n{self.serial_reader.humidity}")
             self.moistdisplay.config(text=f"Current Soil Moisture \n\n\n{self.serial_reader.moisture}")
-            self.regulatordisplay.config(text = f"Fan:\t{self.serial_reader.fanstatus} \n Mister:\t{self.serial_reader.misterstatus} \n Soil Moisture:",)
+            self.regulatordisplay.config(text = f"Fan:\t{self.serial_reader.fanstatus} \n Mister:\t{self.serial_reader.misterstatus} \n Soil Moisture:\t{self.serial_reader.waterstatus}",)
         self.parent.after(1000, self.update_labels)
 
     def start_serial_reading(self):
