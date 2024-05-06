@@ -9,6 +9,8 @@ int humiditysetpoint = 70;
 int moisturesetpoint = 0;
 String fanstatus = "Off";
 String misterstatus = "Off";
+String waterstatus = "Needs Water";
+float temp;
 
 void setup() {
   pinMode(7, OUTPUT);
@@ -20,8 +22,9 @@ void setup() {
 void loop() {
   
   float humidity = dht.readHumidity();
-  float temp = dht.readTemperature();
+  float celctemp = dht.readTemperature();
   int Moisture = analogRead(A1);
+  temp = (celctemp * 9/5) +32;
 
   Serial.print(temp);
   Serial.print(",");
@@ -31,7 +34,10 @@ void loop() {
   Serial.print(",");
   Serial.print(fanstatus);
   Serial.print(",");
-  Serial.println(misterstatus);
+  Serial.print(misterstatus);
+  Serial.print(",");
+  Serial.println(waterstatus);
+
 
   
   delay(2000);
@@ -51,6 +57,12 @@ void loop() {
   else {
     digitalWrite(4, LOW);
     fanstatus = "Off";
+  }
+  if (Moisture > 500){
+    waterstatus = "Needs Water";
+  }
+  else{
+    waterstatus = "Suitable Water Level";
   }
 }
 

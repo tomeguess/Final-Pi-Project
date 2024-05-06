@@ -80,7 +80,7 @@ class Greenhouse(Frame):
         self.display.grid(row = 1, column = 0, columnspan = 3,\
                           sticky = E+W+N+S)
         # add rows to display ideal environment
-        self.display = Label(self, text = f"\tTemperature:     70 - 80 degrees  \nHumidity:     60-80% \nSoil Moisture:   80%   ",
+        self.display = Label(self, text = f"\tTemperature:     60 - 80 degrees  \nHumidity:     65-80% \nSoil Moisture:   600 - 800   ",
                              anchor = W, bg = self.COLOR,
                              height = self.FILL_HEIGHT, width = self.WIDTH,
                              font = (self.FONT, 20))
@@ -106,7 +106,7 @@ class Greenhouse(Frame):
         self.display.grid(row = 2, column = 3, columnspan = 3,\
                           sticky = E+W+N+S)
         # add rows for fan, mister, and moisture display
-        self.regulatordisplay = Label(self, text = "Fan: \n Mister: \n Soil Moisture:",
+        self.regulatordisplay = Label(self, text = "Fan: \n Mister: \n\tSoil Moisture:",
                              anchor = W, bg = self.COLOR,
                              height = self.FILL_HEIGHT, width = self.WIDTH,
                              font = (self.FONT, 20))
@@ -117,19 +117,19 @@ class Greenhouse(Frame):
 
         #button creation
         #create button to change the plant that is in the greenhouse
-        # img = PhotoImage(file = "change plant button.PNG")
-        # button = Button(self, bg = "white", image = img)
-        # button.image = img
-        # button.grid(row = 2, column = 0, columnspan = 3,\
-        #             sticky = N+S+E+W)
+        img = PhotoImage(file = "the plant palace.GIF")
+        button = Button(self, bg = "white", image = img)
+        button.image = img
+        button.grid(row = 2, column = 0, columnspan = 3,\
+                    sticky = N+S+E+W)
 
         # pack the buttons
         self.pack(fill = BOTH, expand = 1)
 
     def update_labels(self):
         if self.serial_reader:
-            self.tempdisplay.config(text=f"Current Greenhouse Temperature \n\n\n{self.serial_reader.temp}")
-            self.humdisplay.config(text=f"Current Greenhouse Humidity \n\n\n{self.serial_reader.humidity}")
+            self.tempdisplay.config(text=f"Current Greenhouse Temperature \n\n\n{self.serial_reader.temp} degrees")
+            self.humdisplay.config(text=f"Current Greenhouse Humidity \n\n\n{self.serial_reader.humidity}%")
             self.moistdisplay.config(text=f"Current Soil Moisture \n\n\n{self.serial_reader.moisture}")
             self.regulatordisplay.config(text = f"Fan:\t{self.serial_reader.fanstatus} \n Mister:\t{self.serial_reader.misterstatus} \n Soil Moisture:\t{self.serial_reader.waterstatus}",)
         self.parent.after(1000, self.update_labels)
